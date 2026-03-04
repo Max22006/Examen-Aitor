@@ -1,5 +1,5 @@
 using UnityEngine;
-using System.Collections;
+using UnityEngine.InputSystem;
 
 public class PlayerController : MonoBehaviour
 
@@ -7,22 +7,39 @@ public class PlayerController : MonoBehaviour
     private InputAction _moveAction;
     private Vector2 _moveDirection;
 
-    private InputAction _jumpForce;
+     
 
-    private RigidBody2D _rbody2D;
-
+    private Rigidbody2D _rbody2D;
+    private InputAction _jumpAction;
+    public GroundSensor sensor;
+    private float movementSpeed = 3;
+    private SpriteRenderer  render;
 
 
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Awake()
     {
-        _rbody2D = GetComponent<RigidBody2D>();
-        _moveAction = InputSystem ["Move"];
+        render = GetComponent<SpriteRenderer>();
+        _rbody2D = GetComponent<Rigidbody2D>();
+        _moveAction = InputSystem.actions["Move"];
+        _jumpAction = InputSystem.actions["Jump"];
+     
     }
 
     // Update is called once per frame
     void Update()
     {
-        _moveDirection = _moveAction;
+        _moveDirection = _moveAction.ReadValue(Vector2);
+       
+
+
+       //if (_jumpForce.WasPressedThisFrame && sensor.isGrounded)
+       {
+           
+       }
+    }
+    void FixedUpdate()
+    {
+        _rbody2D.linearVelocity = new Vector2(_moveDirection.x * movementSpeed, _rbody2D.linearVelocity.y);
     }
 }
