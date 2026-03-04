@@ -33,10 +33,18 @@ public class PlayerController : MonoBehaviour
        
 
 
-       //if (_jumpForce.WasPressedThisFrame && sensor.isGrounded)
+       if (_jumpForce.WasPressedThisFrame && sensor.isGrounded)
        {
-           
+          
        }
+        if (_moveDirection.x < 0)
+           {
+               render.flipX = false;
+           }
+        else if (_moveDirection.x > 0)
+        {
+             render.flipX = true;
+        }
     }
     void FixedUpdate()
     {
