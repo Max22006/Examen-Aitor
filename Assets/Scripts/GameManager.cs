@@ -22,4 +22,13 @@ public class GameManager : MonoBehaviour
             Destroy(enemy);
         }
     }
+//esto va en el script del goomba
+    void OnBecameVisible()
+    {
+        //_gameManager.EnemyList.Add(gameObject);
+    }
+    void OnBecameInvisible()
+    {
+        //_gameManager.EnemyList.Remove(gameObject);
+    }
 }
